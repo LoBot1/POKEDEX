@@ -1,0 +1,24 @@
+{
+  "name": "pokedex-1",
+  "version": "1.0.0",
+  "description": "dorian + logan + node + react (full)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoBot1/POKEDEX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoBot1/POKEDEX/issues"
+  },
+  "homepage": "https://github.com/LoBot1/POKEDEX#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1"
+  }
+}

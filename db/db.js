@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 const connectionString =
-"mongodb+srv://PokeDex:<Aero071810>@cluster0.cmx3pon.mongodb.net/?retryWrites=true&w=majority";
+"mongodb+srv://PokeDex:Aero071810@cluster0.cmx3pon.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

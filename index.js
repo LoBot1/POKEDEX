@@ -1,7 +1,7 @@
 const express = require("express");
 const dbo = require("./db/db");
 const bodyParser = require('body-parser');
-const { ObjectId } = require("mongodb");
+const { ObjectId, ObjectID } = require("mongodb");
 const app = express();
 const port = 4444;
 
@@ -38,19 +38,41 @@ app.get("/pokemonCatch/list", function (req, res) {
 app.use(bodyParser.urlencoded({ extended: true }));
 const jsonParser = bodyParser.json();
 
+// app.post('/pokemonCatch/insert', jsonParser, (req, res) => {
+//   const body = req.body;
+//   console.log('Got body:', body);
+//   const dbConnect = dbo.getDb();
+//   dbConnect
+//     .collection("pokemonCatch")
+//     .insertOne({...body})
+//     .then(function (result, error){
+//       if(error) {
+//         res.json({error : error.message})
+//       }
+//       res.json({result})
+//     });
+// });
+//recuperer un pokemon grace a l'id 
+
 app.post('/pokemonCatch/insert', jsonParser, (req, res) => {
   const body = req.body;
-  console.log('Got body:', body);
   const dbConnect = dbo.getDb();
   dbConnect
+  .collection("pokemonAll")
+  // trouver 1 pokemon grace a l'id dans "pokemon"" 
+  .findOne({_id: ObjectId(body._id)})
+  //inserer le pokemon a pokemonCapture
+  .then(function (error, pokemon){
+    if(error) {
+      res.json({error : error.message})
+    }
+    // insert 
+    dbConnect
     .collection("pokemonCatch")
-    .insertOne({...body})
-    .then(function (result, error){
-      if(error) {
-        res.json({error : error.message})
-      }
-      res.json({result})
-    });
+    .insertOne(pokemon, { forceServerObjectId: false })
+    console.log("Post Updated successfully");
+    res.json({pokemon})
+  });
 });
 
 app.use('/pokemonCatch/delete', jsonParser, (req, res) => {

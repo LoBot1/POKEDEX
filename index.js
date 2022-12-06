@@ -14,7 +14,7 @@ app.get("/pokemonname/list", function (req, res) {
   const dbConnect = dbo.getDb();
   //premier test permettant de récupérer mes pokemons !
   dbConnect
-    .collection("pokemonname/name")
+    .collection("pokemonname")
     .find({}) // permet de filtrer les résultats
     /*.limit(50) // pourrait permettre de limiter le nombre de résultats */
     .toArray(function (err, result) {
@@ -31,9 +31,7 @@ app.get("/pokemonname/list", function (req, res) {
     
 });
 
-app.listen(port, function () {
-  console.log(`App listening on port ${port}!`);
-});
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 const jsonParser = bodyParser.json();
@@ -43,9 +41,14 @@ app.post('/pokemonname/insert', jsonParser, (req, res) => {
   const dbConnect = dbo.getDb();
   dbConnect
     .collection("pokemonname")
-    .insert({name: req.body.name})
-  res.json(req.body.name)
-  //on code ensuite l'insertion dans mongoDB, lisez la doc hehe !!
-      
-  res.json(body);
+    .insert({...body})
+    .then(function (result, error){
+      if(error) {
+        res.json({error : error.message})
+      }
+      res.json({result})
+    });
+});
+app.listen(port, function () {
+  console.log(`App listening on port ${port}!`);
 });

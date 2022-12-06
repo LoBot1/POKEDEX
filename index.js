@@ -96,10 +96,10 @@ app.post('/pokemonCatch/update',jsonParser,(req, res) => {
   console.log(req.body);
   console.log(); 
   const dbConnect = dbo.getDb(); 
-  dbConnect.collection('pokemonCatch').update(
+  dbConnect.collection('pokemonCatch').updateMany(
     { _id: ObjectId(req.body._id) }, 
-    { $set: {name: req.body.name }
-  }, function (err, result) {
+    { $set: {name: req.body.name,type1:req.body.type1,type2:req.body.type2}
+  }, function(err, result) {
        if (err) {
         console.log(err);
         res.send(err.message);

@@ -62,15 +62,16 @@ app.post('/pokemonCatch/insert', jsonParser, (req, res) => {
   // trouver 1 pokemon grace a l'id dans "pokemon"" 
   .findOne({_id: ObjectId(body._id)})
   //inserer le pokemon a pokemonCapture
-  .then(function (error, pokemon){
+  .then(function (pokemon, error){
     if(error) {
-      res.json({error : error.message})
+        res.json({error : error.message})
     }
     // insert 
-    dbConnect
-    .collection("pokemonCatch")
-    .insertOne(pokemon, { forceServerObjectId: false })
-    console.log("Post Updated successfully");
+    else{
+      dbConnect
+      .collection("pokemonCatch")
+      .insertOne(pokemon, { forceServerObjectId: false })
+      console.log("Post Updated successfully");}
     res.json({pokemon})
   });
 });

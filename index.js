@@ -120,7 +120,7 @@ app.post('/pokemonCatch/update',jsonParser,(req, res) => {
   const dbConnect = dbo.getDb(); 
   dbConnect.collection('pokemonCatch').updateMany(
     { _id: ObjectId(req.body._id) }, 
-    { $set: {name: req.body.name,type1:req.body.type1,type2:req.body.type2}
+    { $set: {name: req.body.name,type1:req.body.type1,type2:req.body.type2,desc:req.body.desc,num:req.body.num}
   }, function(err, result) {
        if (err) {
         console.log(err);

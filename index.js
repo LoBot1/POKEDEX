@@ -1,8 +1,10 @@
+var cors = require('cors')
 const express = require("express");
 const dbo = require("./db/db");
 const bodyParser = require('body-parser');
 const { ObjectId, ObjectID } = require("mongodb");
 const app = express();
+app.use(cors())
 const port = 4444;
 
 dbo.connectToServer();

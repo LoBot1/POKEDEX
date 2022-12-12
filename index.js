@@ -190,3 +190,20 @@ app.listen(port, function () {
 });
 
 
+app.get('/pokemonAll/selectone', (req, res) => {
+  const dbConnect = dbo.getDb();
+  dbConnect
+  .collection("pokemonAll")
+  // trouver 1 pokemon grace a l'id dans "pokemon"" 
+  .findOne({_id: ObjectId(req.query.id)})
+  //inserer le pokemon a pokemonCapture
+  .then(function (pokemon, error){
+    if(error) {
+        res.json({error : error.message})
+    }
+    // insert 
+    else{
+      dbConnect
+    res.json({pokemon})
+  }});
+});

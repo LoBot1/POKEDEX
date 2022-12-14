@@ -118,8 +118,6 @@ app.use('/pokemonCatch/delete', jsonParser, (req, res) => {
 // });
 
 app.post('/pokemonCatch/update',jsonParser,(req, res) => {
-  console.log(req.body);
-  console.log(); 
   const dbConnect = dbo.getDb(); 
   dbConnect.collection('pokemonCatch').updateMany(
     { _id: ObjectId(req.body._id) }, 
@@ -190,10 +188,10 @@ app.listen(port, function () {
 });
 
 
-app.get('/pokemonAll/selectone', (req, res) => {
+app.get('/pokemonCatch/selectone', (req, res) => {
   const dbConnect = dbo.getDb();
   dbConnect
-  .collection("pokemonAll")
+  .collection("pokemonCatch")
   // trouver 1 pokemon grace a l'id dans "pokemon"" 
   .findOne({_id: ObjectId(req.query.id)})
   //inserer le pokemon a pokemonCapture

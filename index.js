@@ -205,3 +205,18 @@ app.get('/pokemonCatch/selectone', (req, res) => {
     res.json({pokemon})
   }});
 });
+
+app.post('/pokemonAll/create', jsonParser, (req, res) => {
+  const body = req.body;
+  console.log('Got body:', body);
+  const dbConnect = dbo.getDb();
+  dbConnect
+    .collection("pokemonAll")
+    .insertOne({...body})
+    .then(function (result, error){
+      if(error) {
+        res.json({error : error.message})
+      }
+      res.json({result})
+    });
+});
